@@ -1,3 +1,5 @@
+![Build](https://github.com/SimplyAI-IE/DrivingLessons.BookingSystem/actions/workflows/dotnet.yml/badge.svg)
+
 # DrivingLessons.BookingSystem
 
 An ASP.NET Core backend for managing driving lesson scheduling, booking, and packages — built for a young audience (17–25). Supports real-time availability, credits, admin controls, and gifting.
