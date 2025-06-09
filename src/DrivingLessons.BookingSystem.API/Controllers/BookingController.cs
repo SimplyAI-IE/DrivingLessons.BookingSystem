@@ -5,7 +5,7 @@ using DrivingLessons.BookingSystem.API.Services;
 namespace DrivingLessons.BookingSystem.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/bookings")]
     public class BookingController : ControllerBase
     {
         private readonly SlotService _slotService;
@@ -13,6 +13,13 @@ namespace DrivingLessons.BookingSystem.API.Controllers
         public BookingController(SlotService slotService)
         {
             _slotService = slotService;
+        }
+
+        [HttpGet("slots")]
+        public IActionResult GetAvailableSlots()
+        {
+            var slots = _slotService.GetAvailableSlots(); // assumes this method exists
+            return Ok(slots);
         }
 
         [HttpPost("hold")]

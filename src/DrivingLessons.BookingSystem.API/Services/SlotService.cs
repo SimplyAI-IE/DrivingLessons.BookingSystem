@@ -65,6 +65,26 @@ namespace DrivingLessons.BookingSystem.API.Services
             return true;
         }
 
+        public List<LessonBooking> GetAvailableSlots()
+        {
+            // Replace this with real DB logic if needed
+            return new List<LessonBooking>
+            {
+                new LessonBooking
+                {
+                    Id = Guid.NewGuid(),
+                    SlotTime = DateTime.UtcNow.AddHours(1),
+                    IsConfirmed = false
+                },
+                new LessonBooking
+                {
+                    Id = Guid.NewGuid(),
+                    SlotTime = DateTime.UtcNow.AddHours(2),
+                    IsConfirmed = false
+                }
+            };
+        }
+
         public int CleanupExpiredHolds()
         {
             var threshold = DateTime.UtcNow - HoldDuration;

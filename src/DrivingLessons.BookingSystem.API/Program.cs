@@ -25,7 +25,7 @@ namespace DrivingLessons.BookingSystem.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
 
-            app.UseHttpsRedirection();
+           // app.UseHttpsRedirection();
             app.MapControllers();
 
             var summaries = new[]
