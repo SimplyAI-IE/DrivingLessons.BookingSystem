@@ -2,75 +2,90 @@
 
 # DrivingLessons.BookingSystem
 
-An ASP.NET Core backend for managing driving lesson scheduling, booking, packages, and gifts — built for a young audience (17–25). Supports real-time availability, lesson credits, admin controls, reviews, and gifting.
+An ASP.NET Core backend and React frontend for managing driving lesson scheduling, booking, packages, and gifting — built for a young audience (17–25). Supports real-time availability, lesson credits, admin controls, reviews, and gifting.
 
-Live Deployment:  
-🌐 [https://drivinglessons-bookingsystem.onrender.com/swagger](https://drivinglessons-bookingsystem.onrender.com/swagger)
+**Live API:**  
+🌐 https://drivinglessons-bookingsystem.onrender.com/swagger
+
+**Live Frontend:**  
+🌐 _[Add Vercel/Render link when deployed]_
 
 ---
 
 ## ✅ Features
 
-- Standard one-hour lessons at Tralee test centre (€50)
-- Lessons always start at HH:15 (e.g., 9:15, 10:15)
-- Admin-defined daily availability (1-hour blocks)
-- Real-time booking with 10-minute slot hold
-- Fully automated slot hold → confirm logic
-- Multi-lesson packages with tracked quantity
-- Gift codes with email delivery + redemption
-- Lesson credits stored in account (no expiry)
-- Manual admin override for late changes
-- Review system (one per user, for business)
-- Swagger API documentation
-- CI-tested with GitHub Actions
-- Deployed live via Docker → Render
+- One-hour lessons at Tralee test centre (€50)
+- Lessons start on the :15 (e.g., 9:15, 10:15)
+- Admin-defined daily availability
+- Real-time booking with 10-minute hold window
+- Multi-lesson packages with stored credit
+- Gift codes via email (redeemable in account)
+- Admin override for late changes
+- Review system (1 review per user)
+- CI via GitHub Actions
+- Live Dockerized deployment to Render
+- Frontend built with React + Vite
 
 ---
 
 ## 📦 Booking & Package Rules
 
 - **Lesson Length**: 1 hour @ €50
-- **Start Time**: `HH:15` only
-- **Credit System**: Purchased lessons stored in account
-- **Gift Flow**: Generates email + redemption code
-- **Credits**: Cannot expire (EU compliance)
+- **Start Time**: HH:15
+- **Credit System**: Non-expiring lesson credits
+- **Gift Flow**: Email-based redemption codes
 - **Cancellations**:
   - Free ≥ 48 hours
-  - Admin only < 48 hours
-- **Reviews**: 1 per user, business-wide
+  - Admin override < 48 hours
+- **Reviews**: One per user, business-wide
 
 ---
 
 ## 🔧 Developer Setup
 
+### Backend (ASP.NET Core)
+
 ```bash
 git clone https://github.com/SimplyAI-IE/DrivingLessons.BookingSystem.git
 cd DrivingLessons.BookingSystem
-
-# Run locally (no Docker needed)
 dotnet restore
 dotnet build
 dotnet run --project src/DrivingLessons.BookingSystem.API
+Then open:
 
-# Visit local Swagger UI
-http://localhost:5006/swagger
-Run Tests
+bash
+Copy
+Edit
+http://localhost:5000/swagger
+Frontend (React + Vite)
+bash
+Copy
+Edit
+cd frontend
+npm install
+npm run dev
+Open:
+
+bash
+Copy
+Edit
+http://localhost:5173/book
+http://localhost:5173/admin
+✅ Run Tests
 bash
 Copy
 Edit
 dotnet test
-Covers:
+Tests include:
 
-Slot hold logic
+Slot hold + expiration logic
 
-Booking confirmation
+Confirmations
 
-Expired hold handling
-
-Controller endpoints via WebApplicationFactory
+Controller coverage via WebApplicationFactory
 
 🐳 Docker (Optional)
-For local container builds (WSL2 required):
+For running the backend via Docker:
 
 bash
 Copy
@@ -78,35 +93,63 @@ Edit
 cd src/DrivingLessons.BookingSystem.API
 docker build -t drivinglessons-api .
 docker run -d -p 8080:80 drivinglessons-api
-Then visit:
-http://localhost:8080/swagger
+Visit:
 
-🚀 Deployment (Render)
-Dockerized and hosted at:
-https://drivinglessons-bookingsystem.onrender.com/swagger
-
-Free tier
-
-Auto-builds from main branch via GitHub
-
-📁 Project Structure
-graphql
+bash
 Copy
 Edit
+http://localhost:8080/swagger
+🚀 Deployment (Render)
+Backend (API)
+Dockerized
+
+Auto-deploy from main
+
+Hosted at:
+https://drivinglessons-bookingsystem.onrender.com
+
+Frontend (Static Site)
+Built with Vite
+
+Deployed via Render Static Site
+
+Root Directory: frontend
+
+Build Command:
+
+arduino
+Copy
+Edit
+npm install && npm run build
+Publish Directory:
+
+nginx
+Copy
+Edit
+dist
+📁 Project Structure
+bash
+Copy
+Edit
+frontend/                              # React + Vite frontend
+  ├── pages/                           # React pages: /book, /admin, /add-slot
+  └── ...
+
 src/
-  └── DrivingLessons.BookingSystem.API/     # Main ASP.NET Core API
+  └── DrivingLessons.BookingSystem.API/  # ASP.NET Core API
+
 tests/
-  └── DrivingLessons.BookingSystem.Tests/   # xUnit tests with EF in-memory + controller coverage
+  └── DrivingLessons.BookingSystem.Tests/ # xUnit integration tests
 🛣️ Roadmap
- Admin UI for managing availability
+✅ Booking and admin UI
 
- Package purchase and payment flow (Stripe, Google Pay)
+🔜 Stripe & Google Pay for payments
 
- Custom domain support
+🔜 Custom domain support
 
- SMS reminders (optional Twilio)
+🔜 SMS reminders (Twilio)
 
- Mobile-first frontend (Blazor or JS)
+🔜 Mobile-first redesign (React or Blazor)
 
 📄 License
-MIT License (see LICENSE file)
+MIT License (see LICENSE)
