@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import BookingPage from "./pages/BookingPage";
+import AdminPage from "./pages/AdminPage";
+import AddSlotPage from "./pages/CreateSlotPage";
 
 export default function App() {
   return (
@@ -13,6 +15,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/book" element={<BookingPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/add-slot" element={<AddSlotPage />} />
         </Routes>
       </div>
     </Router>

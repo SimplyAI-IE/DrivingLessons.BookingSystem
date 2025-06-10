@@ -8,11 +8,18 @@ namespace DrivingLessons.BookingSystem.API.Services
     public class SlotService
     {
         private readonly AppDbContext _db;
+        private readonly AppDbContext _context;
         private readonly TimeSpan HoldDuration = TimeSpan.FromMinutes(10);
 
-        public SlotService(AppDbContext db)
+        public SlotService(AppDbContext context)
         {
-            _db = db;
+            _context = context;
+        }
+
+        public void AddSlot(LessonBooking slot)
+        {
+            _context.LessonBookings.Add(slot);
+            _context.SaveChanges();
         }
 
         public bool TryHoldSlot(Guid userId, DateTime slotTime)
@@ -84,6 +91,12 @@ namespace DrivingLessons.BookingSystem.API.Services
                 }
             };
         }
+
+        public List<LessonBooking> GetAllBookings()
+        {
+            return _context.LessonBookings.ToList();
+        }
+
 
         public int CleanupExpiredHolds()
         {

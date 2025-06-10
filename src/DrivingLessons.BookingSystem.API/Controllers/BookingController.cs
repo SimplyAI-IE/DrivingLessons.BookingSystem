@@ -1,6 +1,7 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
 using DrivingLessons.BookingSystem.API.Services;
+using DrivingLessons.BookingSystem.API.Models;
 
 namespace DrivingLessons.BookingSystem.API.Controllers
 {
@@ -14,6 +15,29 @@ namespace DrivingLessons.BookingSystem.API.Controllers
         {
             _slotService = slotService;
         }
+
+        [HttpGet("all")]
+        public IActionResult GetAllBookings()
+        {
+            var allSlots = _slotService.GetAllBookings(); // We'll define this
+            return Ok(allSlots);
+        }
+
+        [HttpPost("add")]
+        public IActionResult AddSlot([FromBody] DateTime slotTime)
+        {
+            var slot = new LessonBooking
+            {
+                Id = Guid.NewGuid(),
+                SlotTime = slotTime,
+                UserId = Guid.Empty,
+                IsConfirmed = false
+            };
+
+            _slotService.AddSlot(slot);
+            return Ok(slot);
+        }
+
 
         [HttpGet("slots")]
         public IActionResult GetAvailableSlots()
